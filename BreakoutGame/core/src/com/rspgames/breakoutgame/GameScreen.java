@@ -25,9 +25,10 @@ public class GameScreen implements Screen {
     int bricksbroken=0;
 
     float pedalSpeed=500;
+    float ballSpeed=50;
     int ballXdir=-2,ballYdir=-4;
     boolean gameOver=false;
-    int ScreenWidth=1280,ScreenHeight=720;
+    float ScreenWidth=1280,ScreenHeight=720;
     public GameScreen(BreakoutGame game) {
         this.game=game;
 
@@ -45,11 +46,11 @@ public class GameScreen implements Screen {
         pedal.width=200;
         pedal.height=25;
 
-        //ball= new Circle();
+        
         ball = new Rectangle();
         ball.x=ScreenWidth/2;
         ball.y=ScreenHeight/2;
-        //ball.radius=10;
+        
         ball.width=20;
         ball.height=20;
 
@@ -102,8 +103,8 @@ public class GameScreen implements Screen {
             pedal.x = ScreenWidth - pedal.width;
 
 
-            ball.x += ballXdir;
-            ball.y += ballYdir;
+            ball.x += ballXdir* Gdx.graphics.getDeltaTime() * ballSpeed;
+            ball.y += ballYdir* Gdx.graphics.getDeltaTime() * ballSpeed;
             if (ball.x < 0 || ball.x > (ScreenWidth - ball.width))
                 ballXdir = -ballXdir;
             if (ball.y > (ScreenHeight-ball.height) )
